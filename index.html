@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sandilya "Sandy" Babbepalli</title>
+<style>
+  :root{
+    /* AYODHYA: sampled from the Tales from the Ramayana frames */
+    --deep:#123C7A;      /* cobalt      dark bands, fills, overlays */
+    --gold:#E8A020;      /* marigold    kickers, labels, micro-type */
+    --flame:#C0503C;     /* terracotta  links, hovers, marks        */
+    --ink:#1A1714;       /* warm near-black, body                   */
+    --ink-soft:#5C554C;
+    --ink-faint:#9A9086;
+    --line:#E4DACB;
+    --bg:#FDFBF6;        /* warm page ground, not pure white        */
+    --wash:#F7F1E4;      /* ivory band                              */
+    --max:1120px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);color:var(--ink);
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;line-height:1.5;
+  }
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 32px}
+  a{color:inherit}
+
+  /* ---------- NAV ---------- */
+  nav{position:sticky;top:0;z-index:50;background:rgba(253,251,246,.92);
+    backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .mark{font-size:13px;letter-spacing:.16em;text-transform:uppercase;font-weight:600}
+  .navlinks{display:flex;gap:26px;align-items:center}
+  .navlinks a{color:var(--ink-soft);text-decoration:none;font-size:12px;
+    letter-spacing:.08em;text-transform:uppercase}
+  .navlinks a:hover{color:var(--gold)}
+  .navlinks a.navresume{
+    color:#fff;font-weight:600;background:var(--deep);
+    padding:7px 14px;border:1px solid var(--deep);
+    transition:background .15s ease,border-color .15s ease,color .15s ease;
+  }
+  .navlinks a.navresume:hover{background:var(--gold);border-color:var(--gold);color:#241B08}
+
+  /* ---------- HERO ---------- */
+  header{padding:70px 0 66px;border-bottom:1px solid var(--line)}
+  .hero{display:grid;grid-template-columns:1.3fr .9fr;gap:64px;align-items:center}
+  .eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--ink-faint);margin-bottom:18px}
+  .eyebrow em{font-style:normal;color:var(--flame)}
+  h1{font-size:clamp(32px,4.2vw,50px);line-height:1.05;letter-spacing:-.03em;
+    font-weight:600;margin-bottom:16px}
+  /* one line, with a tab-width gap before the name */
+  h1{white-space:nowrap}
+  h1 .tabbed{display:inline-block;margin-left:.4em}
+  .lede{font-size:18px;color:var(--ink-soft);max-width:48ch;margin-bottom:20px}
+  .lede b{color:var(--ink);font-weight:600}
+  .idlist{list-style:none;margin:0 0 28px;border-top:1px solid var(--line)}
+  .idlist li{font-size:16px;color:var(--ink-soft);padding:11px 0 11px 22px;
+    border-bottom:1px solid var(--line);position:relative;max-width:44ch}
+  .idlist li::before{content:"";position:absolute;left:0;top:19px;width:9px;height:1px;background:var(--gold)}
+  .idlist li b{color:var(--ink);font-weight:600}
+  .cta{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{display:inline-block;padding:13px 26px;font-size:12px;letter-spacing:.1em;
+    text-transform:uppercase;text-decoration:none;border:1px solid var(--ink);color:var(--ink)}
+  .btn:hover{background:var(--deep);border-color:var(--deep);color:#fff}
+  .btn.solid{background:var(--deep);border-color:var(--deep);color:#fff}
+  .btn.solid:hover{background:var(--flame);border-color:var(--flame)}
+
+  .portrait{position:relative}
+  .portrait img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 18%;display:block}
+  .portrait::after{content:"";position:absolute;inset:0;border:1px solid var(--line);pointer-events:none}
+
+  /* ---------- LOGO WALL ---------- */
+  .logowall{border-bottom:1px solid var(--line);padding:44px 0 48px;background:var(--wash)}
+  .logowall .cap{text-align:center;font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--ink-faint);margin-bottom:30px}
+  .logos{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .logo{
+    aspect-ratio:2/1;background:#fff;border:1.5px solid var(--ink);
+    display:flex;align-items:center;justify-content:center;position:relative;
+    padding:14px;text-align:center;overflow:hidden;
+    transition:background .18s ease,color .18s ease,transform .18s ease;
+  }
+  .logo:hover{transform:translateY(-3px)}
+  .logo img,.logo .wordmark{transition:opacity .16s ease}
+  .logo:hover img,.logo:hover .wordmark{opacity:0}
+  .logo img{max-width:78%;max-height:64%;object-fit:contain}
+  .logo .fav{display:block;height:24px;width:auto;max-width:150px;object-fit:contain;
+    margin:0 auto 9px}
+  .logo .fav.wide{height:auto;width:100px;max-width:100px;max-height:20px;margin:2px auto 10px}
+  .chip .fav{max-width:74%;max-height:74%;object-fit:contain}
+  .chip .fav + i{display:none}
+  .logo .wordmark{font-size:13px;font-weight:700;letter-spacing:-.02em;line-height:1.15;color:var(--ink)}
+  .logo .wordmark small{display:block;font-size:8px;font-weight:600;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--ink-faint);margin-top:5px}
+  .logo .did{
+    position:absolute;inset:0;background:var(--deep);color:#fff;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:12px 14px;text-align:center;opacity:0;transition:opacity .16s ease;pointer-events:none;
+  }
+  .logo:hover .did{opacity:1}
+  .logo .did b{font-size:8px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:6px}
+  .logo .did span{font-size:11.5px;line-height:1.35;letter-spacing:-.005em}
+
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:86px 0;border-bottom:1px solid var(--line)}
+  .sechead{display:flex;align-items:baseline;gap:18px;margin-bottom:46px}
+  .num{font-size:11px;color:var(--ink-faint);letter-spacing:.16em}
+  h2{font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:600}
+  .rule{flex:1;height:1px;background:var(--line)}
+
+  /* ---------- ABOUT ---------- */
+  .about{display:grid;grid-template-columns:1.15fr .85fr;gap:64px}
+  .about p{font-size:16px;color:var(--ink-soft);margin-bottom:18px}
+  .about p.big{font-size:23px;color:var(--ink);letter-spacing:-.015em;line-height:1.38;margin-bottom:24px}
+  .facts{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-content:start}
+  .fact{border:1.5px solid var(--ink);padding:18px 18px 20px}
+  .fact .k{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);
+    margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  .fact .v{font-size:14px;line-height:1.45}
+  .fact .v a{color:var(--flame);text-decoration:none}
+  .fact .v a:hover{text-decoration:underline}
+  a.factlink{display:block;text-decoration:none;transition:background .15s ease,color .15s ease}
+  a.factlink .v{color:var(--flame)}
+  a.factlink:hover{background:var(--deep)}
+  a.factlink:hover .k{color:var(--gold);border-bottom-color:#2C5490}
+  a.factlink:hover .v{color:#fff}
+
+  /* ---------- ORIGIN ---------- */
+  .origin{background:var(--bg)}
+  .places{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:56px}
+  .place{position:relative;padding-right:24px}
+  .place .p{font-size:clamp(18px,2.1vw,24px);letter-spacing:-.02em;font-weight:600;
+    margin-bottom:5px;border-top:1.5px solid var(--ink);padding-top:16px;position:relative}
+  .place .p::before{content:"";position:absolute;top:-4.5px;left:0;width:7px;height:7px;
+    border-radius:50%;background:var(--flame)}
+  .place .y{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint)}
+  .originbody{display:grid;grid-template-columns:.85fr 1.15fr;gap:56px;align-items:start}
+  .originpic figure{margin:0}
+  .originpic img{width:100%;display:block;border:1px solid var(--line)}
+  .originpic figcaption{font-size:11px;letter-spacing:.06em;color:var(--ink-faint);
+    margin-top:12px;line-height:1.5}
+  .origin .prose{max-width:60ch}
+  .origin .prose p{font-size:16.5px;color:var(--ink-soft);margin-bottom:17px}
+  .origin .prose p:first-child{font-size:21px;color:var(--ink);letter-spacing:-.012em;line-height:1.42}
+  .origin .prose p:last-child{margin-bottom:0}
+  .origin .prose b{color:var(--ink);font-weight:600}
+
+  /* ---------- TABS ---------- */
+  .tabs{display:flex;gap:8px;margin-bottom:36px;flex-wrap:wrap}
+  .tab{padding:9px 19px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+    border:1px solid var(--line);background:#fff;color:var(--ink-soft);cursor:pointer;font-family:inherit}
+  .tab[aria-selected="true"]{background:var(--deep);color:#fff;border-color:var(--deep)}
+
+  /* ---------- EXPERIENCE ---------- */
+  .row{display:grid;grid-template-columns:150px 1fr 215px;gap:26px;padding:26px 0;
+    border-top:1px solid var(--line);align-items:start}
+  .row:last-of-type{border-bottom:1px solid var(--line)}
+  .row[hidden]{display:none}
+  .row .yr{font-size:12px;color:var(--ink-faint);letter-spacing:.05em;padding-top:4px}
+  .row .role{font-size:18px;letter-spacing:-.015em;margin-bottom:5px}
+  .row .org{font-size:13px;color:var(--ink-soft);letter-spacing:.02em;
+    display:flex;align-items:center;gap:10px}
+  .chip{flex:0 0 auto;width:30px;height:30px;border:1.5px solid var(--ink);background:#fff;
+    display:inline-flex;align-items:center;justify-content:center;overflow:hidden}
+  .chip img{max-width:74%;max-height:74%;object-fit:contain}
+  .chip.solid img{max-width:100%;max-height:100%;width:100%;height:100%;object-fit:contain}
+  .chip i{font-style:normal;font-size:9.5px;font-weight:700;letter-spacing:-.01em;color:var(--ink)}
+  .row ul{margin-top:12px;padding-left:16px}
+  .row li{font-size:14px;color:var(--ink-soft);margin-bottom:6px;max-width:58ch}
+  .row li b{color:var(--ink);font-weight:600}
+  .tagcol{display:flex;flex-wrap:nowrap;gap:6px;justify-content:flex-end;padding-top:5px}
+  .tag{font-size:9px;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;
+    border:1px solid var(--line);padding:4px 8px;color:var(--ink-faint)}
+
+  /* ---------- PROJECT GRID ---------- */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .card{border:1px solid var(--line);background:#fff;display:flex;flex-direction:column}
+  .card .thumb{aspect-ratio:16/10;background:var(--wash);border-bottom:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+  .card .thumb span{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint)}
+  .card .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .card .thumb.plate{padding:26px}
+  .card .thumb .plateimg{position:static;width:58%;height:68px;
+    object-fit:contain;object-position:center}
+  /* square cover art carries more area, so it can run larger */
+  .card .thumb .plateimg.cover{width:auto;height:104px}
+  /* wide lockups read heavy at full height; pull them back */
+  .card .thumb .plateimg.lockup{width:66%;height:48px}
+  .card .body{padding:22px}
+  .cardlinks{margin-top:12px}
+  .cardlinks a{font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--flame);text-decoration:none;margin-right:14px}
+  .cardlinks a:hover{text-decoration:underline}
+  .card .kicker{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+  .card h3{font-size:17px;font-weight:600;letter-spacing:-.015em;margin-bottom:8px}
+  .card p{font-size:13.5px;color:var(--ink-soft)}
+
+  /* ---------- FILM ---------- */
+  .film{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px;align-items:center}
+  .poster{position:relative}
+  .poster img{width:100%;display:block;border:1px solid var(--line)}
+  .film h3{font-size:clamp(28px,4vw,42px);letter-spacing:-.025em;font-weight:600;margin-bottom:12px;line-height:1.05}
+  .film .meta{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:22px}
+  .film p{font-size:16px;color:var(--ink-soft);margin-bottom:16px;max-width:50ch}
+  .filmstats{display:flex;gap:34px;margin:26px 0 28px;flex-wrap:wrap}
+  .filmstats div .n{font-size:26px;letter-spacing:-.02em}
+  .filmstats div .l{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);margin-top:3px}
+
+  /* ---------- REELS ---------- */
+  .rdintro{max-width:62ch;margin-bottom:40px}
+  .rdintro .lead{font-size:21px;line-height:1.4;letter-spacing:-.012em;
+    color:var(--ink);margin-bottom:16px}
+  .rdintro p{font-size:16px;color:var(--ink-soft);margin-bottom:16px}
+  .rdintro b{color:var(--ink);font-weight:600}
+  .rdintro em{font-style:italic;color:var(--ink)}
+  .rdintro .rdnote{margin:0;padding:16px 0 0 20px;border-left:2px solid var(--gold);
+    font-size:15px;color:var(--ink-soft);padding-top:2px;padding-bottom:2px}
+  .reels{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:760px;margin:0 auto}
+  .reel{border:1px solid var(--line);text-decoration:none;background:#fff;
+    display:flex;flex-direction:column}
+  .reel iframe{width:100%;aspect-ratio:9/16;border:0;display:block;background:var(--wash)}
+  .reel .frame{flex:0 0 auto;aspect-ratio:9/16;background:var(--wash);position:relative;
+    display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--line)}
+  .reel .frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .reel .frame span{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);text-align:center;padding:0 16px}
+  .play{position:absolute;z-index:2;width:52px;height:52px;border-radius:50%;border:1px solid var(--ink);
+    background:rgba(253,251,246,.92);display:flex;align-items:center;justify-content:center}
+  .play::after{content:"";border-left:12px solid var(--ink);border-top:8px solid transparent;
+    border-bottom:8px solid transparent;margin-left:3px}
+  .reel:hover .play{background:var(--flame);border-color:var(--flame)}
+  .reel:hover .play::after{border-left-color:#fff}
+  .reel .cap{padding:14px 14px 16px;border-top:1px solid var(--line);
+    flex:1 1 auto;display:flex;flex-direction:column}
+  .reel .cap .s{font-size:8.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:6px;line-height:1.3;min-height:2.6em}
+  .reel .cap .t{font-size:13px;line-height:1.35;letter-spacing:-.01em;color:var(--ink)}
+  .reelnote{margin:34px 0 0;max-width:62ch;font-size:13px;color:var(--ink-soft);
+    padding:2px 0 2px 20px;border-left:2px solid var(--gold)}
+
+  /* ---------- CONTACT ---------- */
+  .contact{text-align:center;padding:104px 0}
+  .contact .big{font-size:clamp(30px,5vw,50px);letter-spacing:-.025em;font-weight:600;margin:24px 0 30px}
+  .links{display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
+  .links a{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);
+    text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:3px}
+  .links a:hover{color:var(--flame);border-color:var(--flame)}
+  footer{padding:32px 0}
+  footer .wrap{display:flex;justify-content:space-between;font-size:11px;
+    color:var(--ink-faint);letter-spacing:.08em;flex-wrap:wrap;gap:12px}
+
+  /* ---------- TODO FLAGS ---------- */
+  .todo{font-size:11px;color:#b0006a;letter-spacing:.03em;border-left:2px solid #b0006a;
+    padding-left:10px;margin-top:14px;display:none}
+  body.annotated .todo{display:block}
+  .toggle{position:fixed;right:20px;bottom:20px;z-index:99;background:var(--ink);color:#fff;
+    border:0;padding:11px 18px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+    cursor:pointer;font-family:inherit}
+
+  @media(max-width:920px){
+    .wrap{padding:0 22px}
+    .hero,.about,.film{grid-template-columns:1fr;gap:40px}
+    .portrait{max-width:330px}
+    .poster{max-width:300px}
+    .grid{grid-template-columns:1fr}
+    .reels{grid-template-columns:repeat(3,1fr);gap:10px;max-width:none;margin:0 auto}
+    .places{grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:40px}
+    .originbody{grid-template-columns:1fr;gap:32px}
+    .originpic{max-width:360px}
+    .logos{grid-template-columns:repeat(2,1fr)}
+    .logowall{padding:32px 0 36px}
+    .row{grid-template-columns:1fr;gap:8px}
+    .tagcol{justify-content:flex-start;flex-wrap:wrap}
+    section{padding:60px 0}
+    header{padding:60px 0}
+    .navlinks{display:none}
+  }
+
+
+  /* ---------- DARK BANDS ----------
+     Two black blocks break up the white: the film section and the closing
+     contact block. Everything inside inverts off a single class. */
+  .dark{background:var(--deep);color:#fff;border-bottom:0}
+  .dark .num{color:#7E97BE}
+  .dark h2{color:#fff}
+  .dark .rule{background:#2C5490}
+  .dark p{color:#C3D2E6}
+  .dark b{color:#fff}
+  .dark .btn{border-color:#3B639E;color:#fff}
+  .dark .btn:hover{background:var(--gold);border-color:var(--gold);color:#241B08}
+  .dark .btn.solid{background:var(--gold);color:#241B08;border-color:var(--gold)}
+  .dark .btn.solid:hover{background:#fff;border-color:#fff;color:var(--deep)}
+  .dark .poster img{border-color:#2C5490}
+  .dark .film h3{color:#fff}
+  .dark .film .meta{color:var(--gold)}
+  .dark .filmstats div .n{color:#fff}
+  .dark .filmstats div .l{color:#7E97BE}
+  .dark .big{color:#fff}
+  .dark .links a{color:#C3D2E6;border-bottom-color:#2C5490}
+  .dark .links a:hover{color:var(--gold);border-bottom-color:var(--gold)}
+  .dark .todo{color:#FFB2D0;border-left-color:#FFB2D0}
+  footer.dark{border-top:1px solid #2C5490}
+  footer.dark .wrap{color:#7E97BE}
+  /* the contact block and footer read as one continuous slab */
+  section.contact.dark{border-bottom:0}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="mark">Sandilya Babbepalli</div>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#origin">Origin</a>
+      <a href="#work">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#film">Film</a>
+      <a href="#reels">Short Form</a>
+      <a href="#contact">Contact</a>
+      <a class="navresume" href="assets/sandilya-babbepalli-resume.pdf" target="_blank" rel="noopener">R&eacute;sum&eacute;</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap hero">
+    <div>
+      <div class="eyebrow">Los Angeles &nbsp;·&nbsp; <em>Open to 2027 opportunities</em></div>
+      <h1>I go by<span class="tabbed">Sandy.</span></h1>
+      <ul class="idlist">
+        <li>MBA candidate at <b>USC Marshall</b></li>
+        <li>Computer scientist by training, <b>Arizona State</b> 2021</li>
+        <li>Growth strategy at <b>American Express</b></li>
+        <li>Produced an indie short</li>
+        <li>Actor</li>
+      </ul>
+      <div class="cta">
+        <a class="btn solid" href="#work">See the work</a>
+        <a class="btn" href="assets/sandilya-babbepalli-resume.pdf" target="_blank">Résumé ↗</a>
+      </div>
+    </div>
+    <div class="portrait">
+      <img src="assets/headshot.jpg" alt="Sandilya Babbepalli">
+    </div>
+  </div>
+</header>
+
+<div class="logowall">
+  <div class="wrap">
+    <div class="cap">Where I've worked, studied, and built</div>
+    <div class="logos">
+      <div class="logo"><img src="assets/logos/usc-marshall.svg" alt=""><div class="wordmark"><img class="fav" src="https://t0.gstatic.com/faviconV2?client=SOCIAL&amp;type=FAVICON&amp;fallback_opts=TYPE,SIZE,URL&amp;size=128&amp;url=https://usc.edu" alt="">USC Marshall<small>MBA '27</small></div><div class="did"><b>USC Marshall</b><span>MBA (STEM) '27. Dean's Scholarship, GMAT 97th percentile.</span></div></div>
+      <div class="logo"><img src="assets/logos/amex.svg" alt=""><div class="wordmark"><img class="fav" src="https://t0.gstatic.com/faviconV2?client=SOCIAL&amp;type=FAVICON&amp;fallback_opts=TYPE,SIZE,URL&amp;size=128&amp;url=https://americanexpress.com" alt="">American Express<small>Cybersecurity</small></div><div class="did"><b>American Express</b><span>Cut 500K+ access permissions. Built an AI recommendation engine.</span></div></div>
+      <div class="logo"><img src="assets/logos/mckesson.svg" alt=""><div class="wordmark"><img class="fav" src="https://t0.gstatic.com/faviconV2?client=SOCIAL&amp;type=FAVICON&amp;fallback_opts=TYPE,SIZE,URL&amp;size=128&amp;url=https://mckesson.com" alt="">McKesson<small>Engineering</small></div><div class="did"><b>McKesson</b><span>Automated onboarding and infrastructure. Manual effort down 20%.</span></div></div>
+      <div class="logo"><img src="assets/logos/asu.svg" alt=""><div class="wordmark"><img class="fav" src="https://t0.gstatic.com/faviconV2?client=SOCIAL&amp;type=FAVICON&amp;fallback_opts=TYPE,SIZE,URL&amp;size=128&amp;url=https://asu.edu" alt="">Arizona State<small>B.S. CS</small></div><div class="did"><b>Arizona State</b><span>B.S. Computer Science, magna cum laude.</span></div></div>
+      <div class="logo"><img src="assets/logos/hkdl.svg" alt=""><div class="wordmark"><img class="fav" src="https://t0.gstatic.com/faviconV2?client=SOCIAL&amp;type=FAVICON&amp;fallback_opts=TYPE,SIZE,URL&amp;size=128&amp;url=https://disney.com" alt="">Hong Kong Disneyland<small>Franchise Strategy</small></div><div class="did"><b>Hong Kong Disneyland</b><span>Franchise growth strategy for Duffy &amp; Friends.</span></div></div>
+      <div class="logo"><div class="wordmark"><img class="fav" src="assets/logos/carbon-silicon.png" alt="">Carbon Silicon Labs<small>AI Advisory</small></div><div class="did"><b>Carbon Silicon Labs</b><span>Advising an AI-native startup serving local businesses.</span></div></div>
+      <div class="logo"><div class="wordmark"><img class="fav" src="assets/logos/flick.png" alt="">Flick<small>Creative Partner</small></div><div class="did"><b>Flick</b><span>Creative partner. Short-form video as House of Babbepalli.</span></div></div>
+      <div class="logo"><div class="wordmark"><img class="fav wide" src="assets/logos/crossroads.png" alt="">Crossroads Media<small>Product Strategy</small></div><div class="did"><b>Crossroads Media</b><span>Commercialization strategy for an AI entertainment startup.</span></div></div>
+      <div class="logo"><img src="assets/logos/usc-athletics.svg" alt=""><div class="wordmark"><img class="fav" src="https://t0.gstatic.com/faviconV2?client=SOCIAL&amp;type=FAVICON&amp;fallback_opts=TYPE,SIZE,URL&amp;size=128&amp;url=https://usctrojans.com" alt="">USC Athletics<small>Fan Engagement</small></div><div class="did"><b>USC Athletics</b><span>Fan engagement, sponsorship, and content strategy.</span></div></div>
+      <div class="logo"><img src="assets/logos/ddc.svg" alt=""><div class="wordmark"><img class="fav" src="https://images.squarespace-cdn.com/content/v1/682d2957043a5a24be637e27/1684f69a-f5c5-4902-8356-c36fe4a36cee/ddcdog_transparent.png?format=1500w" alt="">Dog Days Collective<small>Film</small></div><div class="did"><b>Dog Days Collective</b><span>Produced and co-wrote <i>Something About Him</i>. 15 crew, $6K.</span></div></div>
+      <div class="logo"><img src="assets/logos/cinelytic.svg" alt=""><div class="wordmark"><img class="fav" src="https://t0.gstatic.com/faviconV2?client=SOCIAL&amp;type=FAVICON&amp;fallback_opts=TYPE,SIZE,URL&amp;size=128&amp;url=https://cinelytic.com" alt="">Cinelytic<small>AI Strategy</small></div><div class="did"><b>Cinelytic</b><span>20+ executive interviews to pressure-test product-market fit.</span></div></div>
+      <div class="logo"><img src="assets/logos/velocity.svg" alt=""><div class="wordmark">Velocity Redesign<small>Co-Founder</small></div><div class="did"><b>Velocity Redesign</b><span>First company. Web presence for 5 local businesses.</span></div></div>
+    </div>
+    <div class="todo">Carbon Silicon Labs, Flick, and Crossroads use the real logo files you sent, shown full-bleed since each ships with its own background. Dog Days Collective uses the transparent PNG from their site. USC, Amex, McKesson, ASU, Disney, USC Athletics, and Cinelytic pull square site icons live from Google's public favicon service, so those need a network connection. Velocity Redesign stays typographic by your call. Drop a file into assets/logos/ to override any tile.</div>
+  </div>
+</div>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sechead"><span class="num">01</span><h2>About</h2><div class="rule"></div></div>
+    <div class="about">
+      <div>
+        <p class="big">I work at the seam between what's technically possible and what's worth building.</p>
+        <p>
+          I started as an engineer. A CS degree from Arizona State, a security internship at McKesson,
+          then four years at American Express, where I learned that the hardest problems in a
+          10,000-person company are rarely technical. They're questions of priority, incentive, and story.
+        </p>
+        <p>
+          So I went to USC Marshall for the MBA, and now I spend my time on the other side of that
+          question: what to build, who it's for, and how it reaches them. That's meant AI
+          commercialization strategy for an entertainment startup, franchise growth work for
+          Duffy &amp; Friends at Hong Kong Disneyland, and fan engagement strategy for USC Athletics.
+        </p>
+        <p>
+          The through-line is storytelling. I produced and co-wrote a short film. I trained in acting at
+          Anupam Kher's Actor Prepares. I've hosted 50+ episodes of my own show. Strategy and
+          storytelling are the same discipline wearing different clothes: figure out what matters,
+          then make someone else care about it too.
+        </p>
+      </div>
+      <div class="facts">
+        <div class="fact"><div class="k">Currently</div><div class="v">MBA Candidate (STEM)<br>USC Marshall, May 2027</div></div>
+        <div class="fact"><div class="k">Previously</div><div class="v">B.S. Computer Science<br>Arizona State, magna cum laude</div></div>
+        <div class="fact"><div class="k">Honors</div><div class="v">Dean's Scholarship<br>GMAT 97th percentile</div></div>
+        <div class="fact"><div class="k">Leadership</div><div class="v">VP Community, Business of Entertainment Assoc.<br>VP Partnerships, S. Asian Business Assoc.</div></div>
+        <div class="fact"><div class="k">Certifications</div><div class="v">Acting Diploma, Actor Prepares<br>CompTIA Security+</div></div>
+        <div class="fact"><div class="k">Also</div><div class="v">Host, <em>Soda with Sandy</em> (50+ eps)<br>Vegetarian cooking · Tennis</div></div>
+        <a class="fact factlink" style="grid-column:span 2" href="assets/sandilya-babbepalli-resume.pdf" target="_blank" rel="noopener">
+          <div class="k">Résumé</div>
+          <div class="v">Open the full PDF ↗</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="origin" id="origin">
+  <div class="wrap">
+    <div class="sechead"><span class="num">02</span><h2>Where I'm From</h2><div class="rule"></div></div>
+    <div class="places">
+      <div class="place"><div class="p">India</div><div class="y">Born</div></div>
+      <div class="place"><div class="p">Australia</div><div class="y">First birthday</div></div>
+      <div class="place"><div class="p">India</div><div class="y">Childhood</div></div>
+      <div class="place"><div class="p">Arizona</div><div class="y">Adolescence &rarr; now</div></div>
+    </div>
+    <div class="originbody">
+    <div class="originpic">
+      <figure>
+        <img src="assets/origin.jpg" alt="Sandy as a small child at a desktop computer">
+        <figcaption>Roughly two decades before the computer science degree.</figcaption>
+      </figure>
+    </div>
+    <div class="prose">
+      <p>Two continents before I could walk. A third before I could drive.</p>
+      <p>
+        Born in India, in Australia by my first birthday, back in India for the years that
+        actually stick, then to America as an adolescent, old enough to remember everything
+        I'd left, young enough to have to start over anyway. What followed was a decade of
+        running two operating systems at once: one culture at home, another the moment I
+        walked out the door.
+      </p>
+      <p>
+        That's not a hardship story. It's a professional instrument. It's why I notice when a
+        product's positioning only makes sense to the people who wrote it, and why
+        <b>Duffy &amp; Friends</b> reads completely differently in Hong Kong than it does in Anaheim,
+        a distinction worth real money to whoever catches it first.
+      </p>
+      <p>
+        Media is a global business staffed largely by people who have lived in one place.
+        I've been the outsider in three. It shows up in how I read a room, how I build a pitch,
+        and what I choose to make.
+      </p>
+    </div>
+    </div>
+
+    <div class="todo">TODO: send approximate years for each move and I'll add real dates under the markers.</div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="sechead"><span class="num">03</span><h2>Experience</h2><div class="rule"></div></div>
+    <div class="tabs">
+      <button class="tab" data-filter="all" aria-selected="true">All</button>
+      <button class="tab" data-filter="strategy" aria-selected="false">Strategy</button>
+      <button class="tab" data-filter="tech" aria-selected="false">Technology</button>
+      <button class="tab" data-filter="creative" aria-selected="false">Creative</button>
+    </div>
+
+    <div class="row" data-cat="strategy creative">
+      <div class="yr">Jun 2026 – Present</div>
+      <div>
+        <div class="role">Product Strategy Consultant</div>
+        <div class="org"><span class="chip solid" style="background:#1b1d24"><img src="assets/logos/crossroads.png" alt=""><i>CM</i></span>Crossroads Media, Los Angeles</div>
+        <ul>
+          <li>Built commercialization and growth strategy for an AI-powered entertainment startup, identifying <b>3 enterprise customer segments</b> and pricing recommendations for launch.</li>
+          <li>Partnered with founders and AI consultants to prioritize roadmap decisions and align technology investment with business objectives.</li>
+          <li>Supported early-stage planning across pricing, partnerships, and technology cost optimization.</li>
+        </ul>
+      </div>
+      <div class="tagcol"><span class="tag">AI</span><span class="tag">GTM</span><span class="tag">Pricing</span></div>
+    </div>
+
+    <div class="row" data-cat="strategy tech">
+      <div class="yr">Jun 2026 – Present</div>
+      <div>
+        <div class="role">Strategy Consultant</div>
+        <div class="org"><span class="chip solid" style="background:#221d1c"><img src="assets/logos/carbon-silicon.png" alt=""><i>CS</i></span>Carbon Silicon Labs</div>
+        <ul>
+          <li>Advising an <b>AI-native startup</b> building workflow tooling for local businesses, helping small operators run leaner without hiring an ops team.</li>
+          <li>Work spans positioning, customer segmentation, and how an AI-first company sells into a market that doesn't buy software the way enterprises do.</li>
+        </ul>
+      </div>
+      <div class="tagcol"><span class="tag">AI</span><span class="tag">SMB</span><span class="tag">Advisory</span></div>
+    </div>
+
+    <div class="row" data-cat="creative tech">
+      <div class="yr">Jun 2026 – Present</div>
+      <div>
+        <div class="role">Creative Partner</div>
+        <div class="org"><span class="chip"><img src="assets/logos/flick.png" alt=""><i>FL</i></span>Flick</div>
+        <ul>
+          <li>Joined <b>Flick</b> in June 2026 to learn AI production from the inside, on a Figma-for-creatives workspace where the whole pipeline lives in one place.</li>
+          <li>Making animation was the childhood ambition; the tools finally caught up to it.</li>
+          <li>Write, direct, and appear in short-form work published as <b>House of Babbepalli</b>: what used to take a crew, a schedule, and a budget, now run by one person.</li>
+          <li>Every piece doubles as <b>R&amp;D</b>: an honest test of where AI creative tools hold up and where they still fall apart. Studios are betting on that answer. I'd rather find it by hand.</li>
+        </ul>
+      </div>
+      <div class="tagcol"><span class="tag">AI</span><span class="tag">Short Form</span><span class="tag">Content</span></div>
+    </div>
+
+    <div class="row" data-cat="strategy creative">
+      <div class="yr">Jan 2026 – Present</div>
+      <div>
+        <div class="role">Strategy Consultant: Cinelytic, Hong Kong Disneyland, USC Athletics</div>
+        <div class="org"><span class="chip"><img src="assets/logos/usc-marshall.svg" alt=""><img class="fav" src="https://t0.gstatic.com/faviconV2?client=SOCIAL&amp;type=FAVICON&amp;fallback_opts=TYPE,SIZE,URL&amp;size=128&amp;url=https://usc.edu" alt=""><i>USC</i></span>USC Marshall Consulting Projects, Los Angeles / Seoul / Hong Kong</div>
+        <ul>
+          <li>Conducted <b>20+ executive interviews</b> to evaluate product-market fit for Cinelytic's AI platform, delivering commercialization and product strategy recommendations.</li>
+          <li>Developed franchise growth strategy for Hong Kong Disneyland's <b>Duffy &amp; Friends</b> across consumer products, digital content, and fan engagement.</li>
+          <li>Built recommendations for USC Athletics on fan engagement, sponsorship, and content strategy to drive audience and revenue growth.</li>
+        </ul>
+      </div>
+      <div class="tagcol"><span class="tag">IP Strategy</span><span class="tag">Research</span></div>
+    </div>
+
+    <div class="row" data-cat="tech strategy">
+      <div class="yr">Jan 2022 – Jun 2024</div>
+      <div>
+        <div class="role">Strategy &amp; Product Development, Cybersecurity</div>
+        <div class="org"><span class="chip"><img src="assets/logos/amex.svg" alt=""><img class="fav" src="https://t0.gstatic.com/faviconV2?client=SOCIAL&amp;type=FAVICON&amp;fallback_opts=TYPE,SIZE,URL&amp;size=128&amp;url=https://americanexpress.com" alt=""><i>AX</i></span>American Express, Phoenix</div>
+        <ul>
+          <li>Led an enterprise-wide access optimization initiative, eliminating <b>500,000+ unnecessary user permissions</b> to reduce operational risk and strengthen regulatory compliance.</li>
+          <li>Redesigned project intake and cross-functional planning, <b>cutting delivery timelines ~15%</b> across multiple engineering teams.</li>
+          <li>Built an AI-powered recommendation engine for enterprise access management, driving adoption across <b>12 engineering teams</b>.</li>
+        </ul>
+      </div>
+      <div class="tagcol"><span class="tag">Security</span><span class="tag">Fintech</span><span class="tag">AI</span></div>
+    </div>
+
+    <div class="row" data-cat="creative">
+      <div class="yr">Jun 2023 – May 2024</div>
+      <div>
+        <div class="role">Producer &amp; Co-Writer</div>
+        <div class="org"><span class="chip"><img src="https://images.squarespace-cdn.com/content/v1/682d2957043a5a24be637e27/1684f69a-f5c5-4902-8356-c36fe4a36cee/ddcdog_transparent.png?format=1500w" alt=""><i>DDC</i></span>DDC Productions, Tempe</div>
+        <ul>
+          <li>Produced and co-wrote <b>Something About Him</b>, leading a 15-person team on a $6K budget from development through release.</li>
+        </ul>
+      </div>
+      <div class="tagcol"><span class="tag">Film</span><span class="tag">Production</span></div>
+    </div>
+
+    <div class="row" data-cat="tech">
+      <div class="yr">May 2020 – Aug 2021</div>
+      <div>
+        <div class="role">Cybersecurity &amp; Platform Engineering Intern</div>
+        <div class="org"><span class="chip"><img src="assets/logos/mckesson.svg" alt=""><img class="fav" src="https://t0.gstatic.com/faviconV2?client=SOCIAL&amp;type=FAVICON&amp;fallback_opts=TYPE,SIZE,URL&amp;size=128&amp;url=https://mckesson.com" alt=""><i>MK</i></span>McKesson Corporation, Scottsdale</div>
+        <ul>
+          <li>Automated infrastructure and onboarding workflows, <b>reducing manual effort ~20%</b>.</li>
+          <li>Selected as McKesson's ASU Campus Ambassador, leading campus recruiting and employer branding.</li>
+        </ul>
+      </div>
+      <div class="tagcol"><span class="tag">Security</span><span class="tag">Automation</span></div>
+    </div>
+
+    <div class="row" data-cat="tech strategy">
+      <div class="yr">2018 – 2020</div>
+      <div>
+        <div class="role">Co-Founder</div>
+        <div class="org"><span class="chip"><img src="assets/logos/velocity.svg" alt=""><i>VD</i></span>Velocity Redesign, Tempe</div>
+        <ul>
+          <li>Started my first company as an ASU freshman with my best friend from high school, building web presence for <b>5 local businesses</b> that didn't have one.</li>
+          <li>Clients included family-run restaurants, a small sushi shop, and an independent yoga practitioner. The kind of operators for whom a working website is the difference between being found and not.</li>
+        </ul>
+      </div>
+      <div class="tagcol"><span class="tag">Founder</span><span class="tag">Web</span></div>
+    </div>
+    <div class="todo">TODO: confirm Velocity Redesign's exact years and the fifth client type. I guessed 2018–2020 from "freshman year."</div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="sechead"><span class="num">04</span><h2>Selected Projects</h2><div class="rule"></div></div>
+    <div class="grid">
+      <div class="card">
+        <div class="thumb plate" style="background:#F5E7D3"><img class="plateimg" src="https://t0.gstatic.com/faviconV2?client=SOCIAL&amp;type=FAVICON&amp;fallback_opts=TYPE,SIZE,URL&amp;size=256&amp;url=https://disney.com" alt="Duffy &amp; Friends"></div>
+        <div class="body">
+          <div class="kicker">Franchise Strategy</div>
+          <h3>Hong Kong Disneyland</h3>
+          <p>Growth strategy for the Duffy &amp; Friends IP across consumer products, digital content, and fan engagement.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="thumb plate" style="background:#E6EDF7"><img class="plateimg lockup" src="https://www.cinelytic.com/static/marketing/v20200107/css/images/logo-color.svg" alt="Cinelytic"></div>
+        <div class="body">
+          <div class="kicker">AI Commercialization</div>
+          <h3>Cinelytic</h3>
+          <p>20+ executive interviews to pressure-test product-market fit for an AI platform in entertainment.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="thumb plate" style="background:#F6E3DC"><img class="plateimg" src="https://t0.gstatic.com/faviconV2?client=SOCIAL&amp;type=FAVICON&amp;fallback_opts=TYPE,SIZE,URL&amp;size=256&amp;url=https://usctrojans.com" alt="USC Athletics"></div>
+        <div class="body">
+          <div class="kicker">Fan Engagement</div>
+          <h3>USC Athletics</h3>
+          <p>Sponsorship and content strategy recommendations to grow audience and revenue.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="thumb plate" style="background:#DFE9F6"><img class="plateimg" src="https://t0.gstatic.com/faviconV2?client=SOCIAL&amp;type=FAVICON&amp;fallback_opts=TYPE,SIZE,URL&amp;size=256&amp;url=https://americanexpress.com" alt="American Express"></div>
+        <div class="body">
+          <div class="kicker">Enterprise Security</div>
+          <h3>Access Optimization at Amex</h3>
+          <p>500K+ permissions eliminated; an AI recommendation engine adopted across 12 engineering teams.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="thumb plate" style="background:#221d1c"><img class="plateimg lockup" src="assets/logos/carbon-silicon.png" alt="Carbon Silicon Labs"></div>
+        <div class="body">
+          <div class="kicker">AI Advisory</div>
+          <h3>Carbon Silicon Labs</h3>
+          <p>Strategy for an AI-native startup building workflow tooling for local businesses.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="thumb plate" style="background:#F7EEDF"><img class="plateimg cover" src="https://i.scdn.co/image/ab6765630000ba8acf6c40d8164184008c3b24d9" alt="Soda With Sandy"></div>
+        <div class="body">
+          <div class="kicker">Founder &amp; Host</div>
+          <h3>Soda With Sandy</h3>
+          <p>50+ episodes on life, love, existential stuff, and movies. Founded, hosted, and produced independently.</p>
+          <p class="cardlinks"><a href="https://open.spotify.com/show/5wMVda0hZFv9hsACPG1vF4" target="_blank">Spotify ↗</a> <a href="#">Apple Podcasts ↗</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="todo">These card images are brand plates: the company mark on a tinted ground, built from files already in the page. They are deliberate rather than placeholder, and they work offline except where noted. The Duffy &amp; Friends card shows the Disney mark because I cannot supply a Duffy photo: that artwork is Disney IP and needs to come from you or a licensed source. Same principle for the others if you would rather show real photography than marks. Apple Podcasts link still needed.</div>
+  </div>
+</section>
+
+<section class="dark" id="film">
+  <div class="wrap">
+    <div class="sechead"><span class="num">05</span><h2>Film &amp; Acting</h2><div class="rule"></div></div>
+    <div class="film">
+      <div class="poster">
+        <img src="assets/sah-poster.jpg" alt="Something About Him poster">
+      </div>
+      <div>
+        <h3>Something About Him</h3>
+        <div class="meta">Producer · Co-Writer · Starring as Sid · 2024</div>
+        <p>
+          An original short shot in the Arizona desert. I produced it, co-wrote it, and played Sid,
+          which meant raising the money, hiring the crew, and then trying to forget all of it
+          the moment the camera rolled.
+        </p>
+        <p>
+          Directed and written with Rajvir Singh and Jack Salowitz. Shot by Max Boissiere.
+        </p>
+        <div class="filmstats">
+          <div><div class="n">15</div><div class="l">Person crew</div></div>
+          <div><div class="n">$6K</div><div class="l">Budget</div></div>
+          <div><div class="n">2024</div><div class="l">Release</div></div>
+        </div>
+        <div class="cta">
+          <a class="btn solid" href="https://www.youtube.com/watch?v=84so6cvIXK0" target="_blank">Watch on YouTube ↗</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="reels">
+  <div class="wrap">
+    <div class="sechead"><span class="num">06</span><h2>Short Form: Flick</h2><div class="rule"></div></div>
+    <div class="rdintro">
+      <p class="lead">I grew up on animation. In June 2026 I joined <b>Flick</b> to find out what happens when you hand that love a new set of tools.</p>
+      <p>
+        Flick is a Figma for creatives, an AI-native workspace where the whole pipeline lives in
+        one place. Under <b>House of Babbepalli</b> I write, direct, and appear in the work.
+        <em>Odyssey</em>, <em>Tales from the Ramayana</em>: the stories I was raised on,
+        made the way I could only imagine as a kid.
+      </p>
+      <p class="rdnote">
+        Every piece doubles as R&amp;D: an honest test of where these tools hold up and where they
+        still fall apart. That answer is worth a great deal to a lot of people. But the reason
+        I keep making them is simpler than that. It's fun.
+      </p>
+    </div>
+    <div class="reels" id="reels">
+      <a class="reel" href="https://www.instagram.com/houseofbabbepalli/" target="_blank" rel="noopener" data-reel="0">
+        <div class="frame"><img src="assets/reels/odyssey-ep1.jpg" alt="Odyssey"><div class="play"></div></div>
+        <div class="cap"><div class="s">Odyssey</div><div class="t">Episode 1 &middot; The Journey Home Begins</div></div>
+      </a>
+      <a class="reel" href="https://www.instagram.com/houseofbabbepalli/" target="_blank" rel="noopener" data-reel="1">
+        <div class="frame"><img src="assets/reels/rama-procession.jpg" alt="Tales from the Ramayana"><div class="play"></div></div>
+        <div class="cap"><div class="s">Tales from the Ramayana</div><div class="t">The procession through Ayodhya</div></div>
+      </a>
+      <a class="reel" href="https://www.instagram.com/houseofbabbepalli/" target="_blank" rel="noopener" data-reel="2">
+        <div class="frame"><img src="assets/reels/ramayana-scene.jpg" alt="Tales from the Ramayana"><div class="play"></div></div>
+        <div class="cap"><div class="s">Tales from the Ramayana</div><div class="t">The army at the shore</div></div>
+      </a>
+    </div>
+    <p class="reelnote">
+      Follow <a href="https://www.instagram.com/houseofbabbepalli/" target="_blank" style="color:var(--flame);text-decoration:none">@houseofbabbepalli ↗</a>
+      &nbsp;·&nbsp; personal: <a href="https://www.instagram.com/iamsandycheeksss/" target="_blank" style="color:var(--flame);text-decoration:none">@iamsandycheeksss ↗</a>
+    </p>
+    <div class="todo">Four of your stills, each cropped to a clean 9:16. The episode lines under the third and fourth are my descriptions of what is on screen, not real titles: send the actual episode names and I will swap them in. Each tile links to the profile; paste post URLs into the REELS list and each will link to its own post in order.</div>
+  </div>
+</section>
+
+<section class="contact dark" id="contact">
+  <div class="wrap">
+    <h2>Contact</h2>
+    <div class="big">Let's make something.</div>
+    <div class="links">
+      <a href="mailto:Sandilya.bvs@gmail.com">Email</a>
+      <a href="mailto:Sandilya.Babbepalli.2027@marshall.usc.edu">USC Email</a>
+      <a href="https://www.linkedin.com/in/sandilya-babbepalli/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://www.instagram.com/iamsandycheeksss/" target="_blank">Instagram</a>
+      <a href="https://www.instagram.com/houseofbabbepalli/" target="_blank">House of Babbepalli</a>
+      <a href="assets/sandilya-babbepalli-resume.pdf" target="_blank">Résumé</a>
+    </div>
+  </div>
+</section>
+
+<footer class="dark">
+  <div class="wrap">
+    <span>© 2026 Sandilya Babbepalli</span>
+    <span>Los Angeles, CA</span>
+  </div>
+</footer>
+
+<button class="toggle" onclick="document.body.classList.toggle('annotated')">Toggle to-dos</button>
+
+<script>
+  // Card images are placeholders until the real files land in /assets.
+  // hide any that fail to load so the filename label shows through instead.
+  document.querySelectorAll('.card .thumb img').forEach(function(img){
+    img.addEventListener('error', function(){ img.style.display = 'none'; });
+    if (img.complete && img.naturalWidth === 0) img.style.display = 'none';
+  });
+
+  // Brand marks (.fav) sit INSIDE the wordmark/chip and are never the swap target.
+  // Some load from Google's favicon endpoint, so if one fails, drop it and let
+  // type carry the tile.
+  document.querySelectorAll('.fav').forEach(function(fav){
+    function drop(){
+      var parent = fav.parentNode;
+      fav.remove();
+      var i = parent && parent.querySelector('i');
+      if (i) i.style.display = 'inline';
+    }
+    fav.addEventListener('error', drop);
+    if (fav.complete && fav.naturalWidth === 0) drop();
+  });
+
+  // Full-tile logo swap: a tile only has a swap target if it carries an image
+  // that is NOT a .fav mark. Tiles without one are already in their final state.
+  document.querySelectorAll('.logo, .chip').forEach(function(tile){
+    var img = tile.querySelector('img:not(.fav)');
+    if (!img) return;
+    var word = tile.querySelector('.wordmark') || tile.querySelector('i');
+    if (!word) return;
+    function useWordmark(){
+      img.style.display = 'none';
+      word.style.display = word.tagName === 'I' ? 'inline' : 'block';
+      // if a brand mark survived alongside it, the initials stay hidden
+      if (word.tagName === 'I' && tile.querySelector('.fav')) word.style.display = 'none';
+    }
+    function useLogo(){ word.style.display = 'none'; img.style.display = 'block'; }
+    img.addEventListener('error', useWordmark);
+    img.addEventListener('load', function(){ if (img.naturalWidth > 0) useLogo(); });
+    if (img.complete) { img.naturalWidth > 0 ? useLogo() : useWordmark(); } else { useWordmark(); }
+  });
+
+  // ---------------------------------------------------------------
+  // HOUSE OF BABBEPALLI - Instagram embeds
+  // Paste post URLs below, one per line. Full URLs or bare shortcodes
+  // both work. Open a reel > Share > Copy link to get one.
+  // ---------------------------------------------------------------
+  var REELS = [
+    // 'https://www.instagram.com/reel/XXXXXXXXXXX/',
+    // 'https://www.instagram.com/reel/YYYYYYYYYYY/',
+    // 'https://www.instagram.com/reel/ZZZZZZZZZZZ/'
+  ];
+
+  (function wireReels(){
+    var wrap = document.getElementById('reels');
+    if (!wrap) return;
+
+    var codes = REELS.map(function(u){
+      var m = String(u).match(/instagram\.com\/(?:reel|reels|p|tv)\/([\w-]+)/);
+      return m ? m[1] : (/^[\w-]{5,}$/.test(String(u).trim()) ? String(u).trim() : null);
+    }).filter(Boolean);
+
+    if (!codes.length) return;   // no links yet: stills just point at the profile
+
+    // point each still at its own post
+    wrap.querySelectorAll('.reel').forEach(function(a, i){
+      if (codes[i]) a.href = 'https://www.instagram.com/reel/' + codes[i] + '/';
+    });
+  })();
+
+  document.querySelectorAll('.tab').forEach(function(t){
+    t.addEventListener('click', function(){
+      document.querySelectorAll('.tab').forEach(function(x){ x.setAttribute('aria-selected','false'); });
+      t.setAttribute('aria-selected','true');
+      var f = t.dataset.filter;
+      document.querySelectorAll('.row').forEach(function(r){
+        r.hidden = !(f === 'all' || (r.dataset.cat || '').split(' ').indexOf(f) > -1);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
